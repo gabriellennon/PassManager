@@ -44,7 +44,14 @@ export function RegisterLoginData() {
       ...formData
     }
 
-    // Save data on AsyncStorage
+    const keyData = await AsyncStorage.getItem('@passmanager:logins')
+    const currentDate = keyData ? JSON.parse(keyData) : [];
+    const currentFormated = [
+      ...currentDate,
+      newLoginData
+    ];
+    await AsyncStorage.setItem('@passmanager:logins', JSON.stringify(currentFormated))
+    reset();
   }
 
   return (
@@ -62,6 +69,7 @@ export function RegisterLoginData() {
             name="title"
             error={
               // message error here
+              'testando'
             }
             control={control}
             placeholder="Escreva o título aqui"
@@ -73,6 +81,7 @@ export function RegisterLoginData() {
             name="email"
             error={
               // message error here
+              'testando'
             }
             control={control}
             placeholder="Escreva o Email aqui"
@@ -85,6 +94,7 @@ export function RegisterLoginData() {
             name="password"
             error={
               // message error here
+              'testando'
             }
             control={control}
             secureTextEntry
