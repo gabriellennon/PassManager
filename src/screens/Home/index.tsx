@@ -29,7 +29,6 @@ export function Home() {
   async function loadData() {
     // Get asyncStorage data, use setSearchListData and setData
     const response = await AsyncStorage.getItem('@passmanager:logins')
-    console.log(response)
     const dataInterface :LoginListDataProps[] = [];
 
     if(response !== null ){
@@ -48,6 +47,13 @@ export function Home() {
   function handleFilterLoginData(search: string) {
     // Filter results inside data, save with setSearchListData
     console.log(search)
+    // console.log(data)
+    if(search !== ''){
+      const dataFiltered = data.filter(e => { e.title.toLowerCase().includes(search.toLowerCase()) })
+      setSearchListData(dataFiltered)
+    }else {
+      setSearchListData(data)
+    }
   }
 
   return (
